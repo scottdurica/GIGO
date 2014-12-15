@@ -26,6 +26,8 @@ public class DbHandler extends SQLiteOpenHelper {
     public DbHandler(Context context,String name, SQLiteDatabase.CursorFactory factory, int version){
         super(context, DATABASE_NAME, factory,DATABASE_VERSION);
     }
+    //this is a comment test
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_STORES_TABLE = "CREATE_TABLE " +
