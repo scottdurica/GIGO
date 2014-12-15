@@ -26,7 +26,8 @@ public class DbHandler extends SQLiteOpenHelper {
     public DbHandler(Context context,String name, SQLiteDatabase.CursorFactory factory, int version){
         super(context, DATABASE_NAME, factory,DATABASE_VERSION);
     }
-    //this is a comment test
+    //this is a comment test to see if it's pushing to Git
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
