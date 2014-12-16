@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,10 @@ public class DbHandler extends SQLiteOpenHelper {
     public static final String COLUMN_STORE_ADDRESS = "storeaddress";
 
 
+    public DbHandler(Context context) {
+        super(context, DATABASE_NAME, null,DATABASE_VERSION);
 
+    }
     public DbHandler(Context context,String name, SQLiteDatabase.CursorFactory factory, int version){
         super(context, DATABASE_NAME, factory,DATABASE_VERSION);
     }
@@ -31,7 +35,7 @@ public class DbHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_STORES_TABLE = "CREATE_TABLE " +
+        String CREATE_STORES_TABLE = "CREATE TABLE " +
                 TABLE_STORES + "(" + COLUMN_ID + " INTEGER PRIMARY KEY," +
                 COLUMN_STORE_NAME + " VARCHAR," + COLUMN_STORE_ADDRESS + " VARCHAR" + ")";
         db.execSQL(CREATE_STORES_TABLE);
@@ -43,14 +47,18 @@ public class DbHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addStore (Store store){
+    public boolean addStore (Store store){
         ContentValues values = new ContentValues();
         values.put(COLUMN_STORE_NAME, store.getStoreName());
         values.put(COLUMN_STORE_ADDRESS, store.getStoreAddress());
 
         SQLiteDatabase db = this.getWritableDatabase();
-        db.insert(TABLE_STORES, null, values);
+        long finished = db.insert(TABLE_STORES, null, values);
         db.close();
+        if (finished != -1) {
+            return true;
+        }
+        return false;
 
     }
     public List<Store> findStore(String storeName){
