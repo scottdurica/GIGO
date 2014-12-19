@@ -69,8 +69,30 @@ public class DbHandler extends SQLiteOpenHelper {
 
         while(cursor.moveToNext()){
             Store s = new Store();
-            
+            stores.add(s);
         }
         return stores;
+    }
+
+    public List<Store> getAllStores() {
+        String query = "Select * from " + TABLE_STORES + "";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        List<Store> stores = new ArrayList<Store>();
+        if (cursor.moveToFirst()) {
+            do {
+                Store s = new Store();
+                s.setStoreName(cursor.getString(1));
+                s.setStoreAddress(cursor.getString(2));
+                stores.add(s);
+            }while(cursor.moveToNext());
+
+        }
+        return stores;
+
+    }
+    public void deleteAllStores(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_STORES);
     }
 }

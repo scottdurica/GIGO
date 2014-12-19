@@ -16,6 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ItemsScreen"
+            android:label="@string/title_activity_items_screen"
+            android:parentActivityName=".SummaryScreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="gigo.emroxriprap.com.gigo.SummaryScreen" />
+        </activity>
     </application>
 
 </manifest>
