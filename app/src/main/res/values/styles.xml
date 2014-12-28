@@ -3,6 +3,46 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+
+        <!-- Support library compatibility -->
+        <item name="actionBarStyle">@style/MyActionBar</item>
     </style>
+
+    <!-- ActionBar styles -->
+    <style name="MyActionBar"
+        parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@drawable/orange_bg</item>
+
+        <!-- Support library compatibility -->
+        <item name="background">@drawable/orange_bg</item>
+    </style>
+
+    <style name="header">
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:typeface">serif</item>
+        <item name="android:textColor">#ff999999</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="silly_big_text">
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:typeface">serif</item>
+        <item name="android:textColor">#ff797979</item>
+        <item name="android:textSize">40dp</item>
+    </style>
+    <style name="silly_medium_text">
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:typeface">serif</item>
+        <item name="android:textColor">#ff797979</item>
+        <item name="android:textSize">30dp</item>
+    </style>
+
 
 </resources>

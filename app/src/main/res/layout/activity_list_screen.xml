@@ -4,28 +4,28 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".SummaryScreen">
-<FrameLayout
-    android:layout_width="fill_parent"
-    android:layout_height="200dp"
-    android:id="@+id/frameLayout"
-    android:layout_below="@+id/textView"
-    android:layout_marginBottom="25dp">
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:id="@+id/frameLayout"
+        android:layout_below="@+id/textView"
+        android:layout_marginBottom="25dp">
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:id="@+id/lv_stores"
-        android:paddingTop="15dp"
+        <ListView
+            android:layout_width="wrap_content"
+            android:id="@+id/lv_lists"
+            android:paddingTop="15dp"
 
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_height="wrap_content" />
-</FrameLayout>
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Let&apos;s Go! Pick a store"
+        android:text="Choose a starter list"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -58,10 +58,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Add a store"
+            android:text="Start new list"
             android:id="@+id/textView3"
             style="@style/silly_medium_text"
-            android:layout_alignBottom="@+id/angry_btn"
+            android:layout_alignBottom="@+id/b_start_new_list"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:padding="0dp"
@@ -74,7 +74,7 @@
             android:textColor="#009900"
             android:textSize="40dp"
             style = "?android:attr/borderlessButtonStyle"
-    android:background="@drawable/button_shape"
+            android:background="@drawable/button_shape"
 
 
             android:layout_height="wrap_content"

@@ -4,6 +4,17 @@ package gigo.emroxriprap.com.gigo;
  * Created by Suzanne on 12/15/2014.
  */
 public class Store {
+    private String storeName;
+    private String storeAddress;
+    private int id;
+
+    public Store(String storeName, String storeAddress) {
+        this.storeName = storeName;
+        this.storeAddress = storeAddress;
+    }
+
+    public Store() {
+    }
 
     public String getStoreName() {
         return storeName;
@@ -29,7 +40,5 @@ public class Store {
         this.id = id;
     }
 
-    private String storeName;
-    private String storeAddress;
-    private int id;
+
 }

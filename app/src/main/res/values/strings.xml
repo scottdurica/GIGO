@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">GIGO</string>
+    <string name="app_name">GIGO (Get In - Get Out)</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_items_screen">ItemsScreen</string>
+    <string name="title_activity_items_screen">Items</string>
+    <string name="title_activity_list_screen">Choose a List</string>
+    <string name="title_activity_grocery_list_screen">GroceryListScreen</string>
 
 </resources>

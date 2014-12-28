@@ -2,8 +2,8 @@ package gigo.emroxriprap.com.gigo;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,71 +12,65 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
-public class SummaryScreen extends ActionBarActivity implements View.OnClickListener {
+public class ListScreen extends ActionBarActivity {
 
-
-    private ListView storeListView;
+    private TextView storeName, storeAddress;
+    private ListView listListView;
+    private int storeId;
 
     private MyCustomAdapter adapter;
-    private List<Store> storeList;
-
+    private List<MyList> listsList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         DbHandler db = new DbHandler(this);
-        storeList = db.getAllStores();
-//        testAddSampleStores(db);
-        setContentView(R.layout.activity_summary_screen);
+//        testAddSampleListsToDB(db);
+        listsList = db.getAllLists();
+        setContentView(R.layout.activity_list_screen);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        String storeName = this.getIntent().getStringExtra("name");
+        String storeAddress = this.getIntent().getStringExtra("address");
+        storeId = this.getIntent().getIntExtra("id",0);
+        setTitle(storeName + " (" + storeAddress + ")");
 
         loadViews();
     }
 
-    private void testAddSampleStores(DbHandler db) {
-        Store one = new Store("Walmart","Manchester");
-        Store two = new Store("Walmart","Derry");
-        Store three = new Store("Market Basket","Londonderry");
-        db.addStore(one);
-        db.addStore(two);
-        db.addStore(three);
-        storeList=db.getAllStores();
+    private void testAddSampleListsToDB(DbHandler db) {
+        MyList one = new MyList("Weekly List", "eggs, bacon, milk");
+        MyList two = new MyList("Bi-Weekly List", "sugar, flour, coffee");
+        db.addLists(one);
+        db.addLists(two);
     }
 
     private void loadViews() {
-        storeListView = (ListView)findViewById(R.id.lv_stores);
-        adapter = new MyCustomAdapter(this);
-        storeListView.setAdapter(adapter);
+        listListView = (ListView)findViewById(R.id.lv_lists);
+        listListView.setAdapter(new MyCustomAdapter(this));
 
-        storeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Store s = storeList.get(position);
-                Log.d("LOOKIE HERE","Value is "+ s.getStoreName());
-                Intent intent = new Intent(SummaryScreen.this, ListScreen.class);
-                intent.putExtra("id", s.getId());
-                intent.putExtra("name",s.getStoreName());
-                intent.putExtra("address", s.getStoreAddress());
+                MyList l = listsList.get(position);
+//                Log.d("LOOKIE HERE","Value is "+ s.getStoreName());
+                Intent intent = new Intent(ListScreen.this, GroceryListScreen.class);
+                intent.putExtra("id",l.getId());
+                intent.putExtra("storeId",storeId);
                 startActivity(intent);
             }
         });
-
-
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_summary_screen, menu);
+        getMenuInflater().inflate(R.menu.menu_list_screen, menu);
         return true;
     }
 
@@ -87,8 +81,6 @@ public class SummaryScreen extends ActionBarActivity implements View.OnClickList
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -96,19 +88,7 @@ public class SummaryScreen extends ActionBarActivity implements View.OnClickList
 
         return super.onOptionsItemSelected(item);
     }
-
-
-    @Override
-    public void onClick(View v) {
-
-        switch (v.getId()) {
-            case 0:
-
-                break;
-        }
-
-    }
-    private class MyCustomAdapter extends BaseAdapter{
+    private class MyCustomAdapter extends BaseAdapter {
         private Context myContext;
 
 
@@ -119,7 +99,7 @@ public class SummaryScreen extends ActionBarActivity implements View.OnClickList
 
         @Override
         public int getCount() {
-            return storeList.size();
+            return listsList.size();
         }
 
         @Override
@@ -139,11 +119,11 @@ public class SummaryScreen extends ActionBarActivity implements View.OnClickList
                 convertView = inflater.inflate(R.layout.list_item_storelist, null);
             }
             TextView nameView = (TextView)convertView.findViewById(R.id.tv_list_item_storelist_storename);
-            TextView addressView = (TextView)convertView.findViewById(R.id.tv_list_item_storelist_storeaddress);
+            TextView countView = (TextView)convertView.findViewById(R.id.tv_list_item_storelist_storeaddress);
 
-            Store s = storeList.get(position);
-            nameView.setText(s.getStoreName());
-            addressView.setText(s.getStoreAddress());
+            MyList l = listsList.get(position);
+            nameView.setText(l.getListName());
+            countView.setText(l.getItemsList());
             return convertView;
         }
     }
